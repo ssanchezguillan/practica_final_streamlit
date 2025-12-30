@@ -9,16 +9,19 @@ st.set_page_config(page_title="Dashboard de Ventas", page_icon="📊", layout="w
 @st.cache_data
 def load_data()->pd.DataFrame:
     """
-    Carga los dos archivos csv, los concatena y prepara las columnas
-    necesarias
+    Carga los dos archivos csv dede Github Releases,
+    los concatena y prepara las columnas necesarias
     
     Returns
         pd.DataFrame: DataFrame con todos los datos unidos y procesados
         
     """
     #cargamos los csv
-    df1 = pd.read_csv("parte_1.csv")
-    df2 = pd.read_csv("parte_2.csv")
+    url1 = "https://github.com/ssanchezguillan/practica_final_streamlit/releases/download/v1.0/parte_1.csv"
+    url2 = "https://github.com/ssanchezguillan/practica_final_streamlit/releases/download/v1.0/parte_2.csv"
+
+    df1 = pd.read_csv(url1)
+    df2 = pd.read_csv(url2)
 
     df = pd.concat([df1,df2], ignore_index=True)
 
