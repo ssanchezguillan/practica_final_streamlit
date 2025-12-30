@@ -22,21 +22,16 @@ def load_data()->pd.DataFrame:
 
     usecols = [
         "date", "store_nbr", "family", "sales", "onpromotion",
-        "transactions", "city", "state", "type"
+        "transactions", "city", "state", "store_type",
+        "year", "month", "week", "day_of_week"
     ]
 
-    df1 = pd.read_csv(url1, usecols=usecols)
-    df2 = pd.read_csv(url2, usecols=usecols)
+    df1 = pd.read_csv(url1, usecols=usecols, low_memory=False)
+    df2 = pd.read_csv(url2, usecols=usecols, low_memory=False)
 
     df = pd.concat([df1,df2], ignore_index=True)
 
     df["date"] = pd.to_datetime(df["date"], errors="coerce") #convertimos la columna date a tipo datetime
-
-    df["day_of_week"] = df["date"].dt.day_name()
-    df["month"] = df["date"].dt.month
-    df["day"] = df["date"].dt.day
-    df["year"] = df["date"].dt.year
-    df["week"] = df["date"].dt.isocalendar().week.astype(int)
 
     return df
 
